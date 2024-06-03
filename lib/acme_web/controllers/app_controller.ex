@@ -1,5 +1,6 @@
 defmodule AcmeWeb.AppController do
   use AcmeWeb, :controller
+  alias AcmeWeb.Node
 
   def add_default_meta(conn) do
     conn
@@ -33,11 +34,29 @@ defmodule AcmeWeb.AppController do
   end
 
   def index(conn, _params) do
-    conn
-    |> add_default_meta
-    |> add_default_headers
-    |> add_host
-    |> render(:index)
+    Node.ssr(%Node.SSR{
+      headers: %{},
+      url: Plug.Conn.request_url(conn)
+    })
+    |> case do
+      {:ok, %{"html" => html, "head" => head}} ->
+        conn
+        |> add_default_headers
+        |> add_host
+        |> render(
+          :ssr,
+          body: html,
+          data: nil,
+          head: head
+        )
+
+      {:error, msg} ->
+        # credo:disable-for-next-line
+        IO.inspect(msg)
+
+        conn
+        |> send_resp(500, "Error")
+    end
   end
 
   def use_ssr? do

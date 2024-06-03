@@ -14,6 +14,19 @@ defmodule Acme.Application do
       {Phoenix.PubSub, name: Acme.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: Acme.Finch},
+      %{
+        id: NodeJS,
+        start: {
+          NodeJS,
+          :start_link,
+          [
+            [
+              path: to_string(:code.priv_dir(:acme)),
+              pool_size: 5
+            ]
+          ]
+        }
+      },
       # Start a worker by calling: Acme.Worker.start_link(arg)
       # {Acme.Worker, arg},
       # Start to serve requests, typically the last entry
