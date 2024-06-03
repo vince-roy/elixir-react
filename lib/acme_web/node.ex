@@ -6,11 +6,11 @@ defmodule AcmeWeb.Node do
 
   defp ssr_node(%SSR{} = args) do
     NodeJS.call(
-      "ssr",
+      {"ssr.mjs", :run},
       [
         Map.from_struct(args)
       ],
-      binary: true
+      esm: true
     )
   end
 

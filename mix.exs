@@ -50,7 +50,7 @@ defmodule Acme.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
       {:req, "~> 0.5"},
-      {:nodejs, "~> 2.0"}
+      {:nodejs, "~> 3.1"}
     ]
   end
 

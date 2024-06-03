@@ -30,7 +30,7 @@ defmodule AcmeWeb.Layouts do
         "http://localhost:5173/src/entry-client.tsx"
       ]
     else
-      File.read(Path.join(:code.priv_dir(:acme), "static/public/client/manifest.json"))
+      File.read(Path.join(:code.priv_dir(:acme), "static/public/client/.vite/manifest.json"))
       |> case do
         {:ok, file} ->
           file

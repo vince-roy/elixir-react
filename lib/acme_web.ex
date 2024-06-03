@@ -17,7 +17,26 @@ defmodule AcmeWeb do
   those modules here.
   """
 
-  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+  def static_paths,
+    do: [
+      "public",
+      "assets",
+      "css",
+      "fonts",
+      "images",
+      "js",
+      "favicon.svg",
+      "robots.txt",
+      "node_modules",
+      "src",
+      "favicon.ico",
+      "apple-touch-icon.png",
+      "favicon-16x16.png",
+      "favicon-32x32.png",
+      "site.websitemanifest",
+      "safari-pinned-tab.svg",
+      "robots.txt"
+    ]
 
   def router do
     quote do
