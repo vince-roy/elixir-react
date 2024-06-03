@@ -1,0 +1,7 @@
+<div id="root"><%= raw(@body) %></div>
+<div id="modals"></div>
+<%= unless is_nil(@data) do %>
+  <script>
+    window.__URQL_DATA__=<%= raw(@data) %>
+  </script>
+<% end %>

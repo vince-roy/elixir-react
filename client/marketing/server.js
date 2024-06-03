@@ -22,7 +22,11 @@ let vite;
 if (!isProduction) {
   const { createServer } = await import("vite");
   vite = await createServer({
-    server: { middlewareMode: true },
+    server: {
+      middlewareMode: true,
+      origin: `http://localhost:${port}`,
+      port,
+    },
     appType: "custom",
     base,
   });
@@ -43,6 +47,7 @@ app.use("*", async (req, res) => {
     let render;
     if (!isProduction) {
       // Always read fresh template in development
+      console.log("Reading fresh template in development");
       template = await fs.readFile("./index.html", "utf-8");
       template = await vite.transformIndexHtml(url, template);
       render = (await vite.ssrLoadModule("/src/entry-server.tsx")).render;

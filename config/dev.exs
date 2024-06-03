@@ -1,5 +1,8 @@
 import Config
 
+config :acme,
+  use_vite_server: true
+
 # Configure your database
 config :acme, Acme.Repo,
   username: "postgres",
@@ -24,10 +27,7 @@ config :acme, AcmeWeb.Endpoint,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "SsfdbA1SgTf7w5g7ofdcKDbfPBFef1OAalnW3lDytCH4hX35ezZ2y0uZXBLxCIUY",
-  watchers: [
-    esbuild: {Esbuild, :install_and_run, [:acme, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:acme, ~w(--watch)]}
-  ]
+  watchers: []
 
 # ## SSL Support
 #
@@ -83,3 +83,5 @@ config :phoenix_live_view,
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
+
+import_config "dev.secret.exs"
