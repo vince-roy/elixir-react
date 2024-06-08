@@ -37,7 +37,6 @@ defmodule AcmeWeb.ExpoController do
     |> add_default_headers
     |> add_host
     |> put_root_layout({AcmeWeb.Layouts, :expo})
-    |> IO.inspect()
     |> render(:index, layout: false)
   end
 end
