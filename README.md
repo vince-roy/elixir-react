@@ -16,6 +16,7 @@ This project contains examples on running Expo, Elixir and React together end-to
 
 ### Local Prod
  * Run `CDN_URL="http://localhost:4000/public/expo" mix assets.build`
+ * Run `npm run --prefix client/marketing build`
  * Run `MIX_ENV=prod mix phx.server`
  * Go to `http://localhost:4000`
  * React/Vite WIP

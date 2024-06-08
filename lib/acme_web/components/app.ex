@@ -35,7 +35,7 @@ defmodule AcmeWeb.App do
           file
           |> Jason.decode!()
           |> case do
-            %{"src/entry-client.ts" => %{"file" => file}} ->
+            %{"src/entry-client.tsx" => %{"file" => file}} ->
               [Path.join([AcmeWeb.cdn_url(), "/public/client/", file])]
 
             _ ->
@@ -53,15 +53,15 @@ defmodule AcmeWeb.App do
     if Application.get_env(:acme, :use_vite_server) do
       []
     else
-      File.read(Path.join(:code.priv_dir(:acme), "static/public/client/manifest.json"))
+      File.read(Path.join(:code.priv_dir(:acme), "static/public/client/.vite/manifest.json"))
       |> case do
         {:ok, file} ->
           file
           |> Jason.decode!()
           |> case do
-            %{"src/entry-client.ts" => %{"css" => css}} ->
+            %{"src/entry-client.tsx" => %{"css" => css}} ->
               Enum.map(css, fn file ->
-                Path.join([AcmeWeb.cdn_url(), "/public/client/", file])
+                Path.join([AcmeWeb.cdn_url(), "/client/", file])
               end)
 
             _ ->
