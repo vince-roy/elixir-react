@@ -1,44 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <%= if Application.get_env(:acme, :use_vite_server) do %>
-      <script type="module">
-        import RefreshRuntime from "http://localhost:5173/@react-refresh"
-        RefreshRuntime.injectIntoGlobalHook(window)
-        window.$RefreshReg$ = () => {}
-        window.$RefreshSig$ = () => (type) => type
-        window.__vite_plugin_react_preamble_installed__ = true
-      </script>
-      <script type="module" src="http://localhost:5173/@vite/client">
-      </script>
-    <% end %>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= assigns[:meta]["title"] %></title>
-    <meta name="description" content={assigns[:meta]["description"]} />
-    <meta name="og:title" content={assigns[:meta]["title"]} />
-    <meta name="og:description" content={assigns[:meta]["description"]} />
-    <%= if not is_nil(assigns[:meta]["image"]) and assigns[:meta]["image"] !== "" do %>
-      <meta property="og:image" content={raw(assigns[:meta]["image"])} />
-    <% else %>
-      <meta property="og:image" content={"//" <> assigns[:host] <> "/images/og.png"} />
-    <% end %>
-    <%= for {name, content} <- metas() do %>
-      <meta name={name} content={content} />
-    <% end %>
-    <%= for stylesheet <- stylesheets() do %>
-      <link rel="stylesheet" href={stylesheet} />
-    <% end %>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#07223e" />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="theme-color" content="#ffffff" />
+defmodule AcmeWeb.Expo do
+  use Phoenix.Component
 
+  def scripts do
+    File.read(Path.join(:code.priv_dir(:acme), "static/public/expo/manifest.json"))
+    |> case do
+      {:ok, file} ->
+        file
+        |> Jason.decode!()
+        |> case do
+          %{"root" => path} ->
+            ["http://localhost:4000/public" <> path]
+
+          _ ->
+            []
+        end
+
+      {:error, _} ->
+        []
+    end
+  end
+
+  def styles(assigns) do
+    ~H"""
     <style id="expo-reset">
        /**
       * Extend the react-native-web reset:
@@ -262,30 +245,6 @@
          }
        }
     </style>
-    <style id="expo-reset">
-      /* These styles make the body full-height */
-      html,
-      body {
-        height: 100%;
-      }
-      /* These styles disable body scrolling if you are using <ScrollView> */
-      body {
-        overflow: hidden;
-      }
-      /* These styles make the root element full-height */
-      #root {
-        display: flex;
-        height: 100%;
-        flex: 1;
-      }
-    </style>
-  </head>
-  <body>
-    <%= @inner_content %>
-
-    <%= for script <- scripts() do %>
-      <script async defer src={script}>
-      </script>
-    <% end %>
-  </body>
-</html>
+    """
+  end
+end

@@ -67,7 +67,7 @@ defmodule Acme.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": [],
-      "assets.build": [],
+      "assets.build": ["run ./priv/build_expo.exs"],
       "assets.deploy": []
     ]
   end

@@ -16,7 +16,8 @@ defmodule AcmeWeb.Router do
   scope "/", AcmeWeb do
     pipe_through :browser
 
-    get "/", AppController, :index
+    get "/", ExpoController, :index
+    get "/react", AppController, :index
   end
 
   # Other scopes may use custom stacks.
