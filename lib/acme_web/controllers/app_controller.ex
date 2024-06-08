@@ -39,15 +39,16 @@ defmodule AcmeWeb.AppController do
       url: Plug.Conn.request_url(conn)
     })
     |> case do
-      {:ok, %{"html" => html, "head" => head}} ->
+      {:ok, %{"html" => html} = response} ->
         conn
         |> add_default_headers
         |> add_host
+        |> put_root_layout({AcmeWeb.Layouts, :app})
         |> render(
           :ssr,
           body: html,
           data: nil,
-          head: head
+          head: response["head"]
         )
 
       {:error, msg} ->
@@ -57,9 +58,5 @@ defmodule AcmeWeb.AppController do
         conn
         |> send_resp(500, "Error")
     end
-  end
-
-  def use_ssr? do
-    Application.get_env(:acme, :ssr) || false
   end
 end

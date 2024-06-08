@@ -24,12 +24,6 @@
     <% else %>
       <meta property="og:image" content={"//" <> assigns[:host] <> "/images/og.png"} />
     <% end %>
-    <%= for {name, content} <- metas() do %>
-      <meta name={name} content={content} />
-    <% end %>
-    <%= for stylesheet <- stylesheets() do %>
-      <link rel="stylesheet" href={stylesheet} />
-    <% end %>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

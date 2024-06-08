@@ -17,6 +17,10 @@ defmodule AcmeWeb do
   those modules here.
   """
 
+  def cdn_url do
+    Application.get_env(:acme, AcmeWeb.Endpoint)[:cdn_url]
+  end
+
   def static_paths,
     do: [
       "public",

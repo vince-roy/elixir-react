@@ -1,7 +1,7 @@
 import Config
 
 config :acme,
-  use_vite_server: false
+  use_vite_server: true
 
 # Configure your database
 config :acme, Acme.Repo,
