@@ -43,7 +43,7 @@ defmodule AcmeWeb.AppController do
         conn
         |> add_default_headers
         |> add_host
-        |> put_root_layout({AcmeWeb.Layouts, :app})
+        # |> put_root_layout({AcmeWeb.Layouts, :app})
         |> render(
           :ssr,
           body: html,

@@ -2,19 +2,21 @@ defmodule AcmeWeb.App do
   use Phoenix.Component
 
   def head(assigns) do
-    if Application.get_env(:acme, :use_vite_server) do
-      ~H"""
-      <script type="module">
-        import RefreshRuntime from "http://localhost:5173/@react-refresh"
-        RefreshRuntime.injectIntoGlobalHook(window)
-        window.$RefreshReg$ = () => {}
-        window.$RefreshSig$ = () => (type) => type
-        window.__vite_plugin_react_preamble_installed__ = true
-      </script>
-      <script type="module" src="http://localhost:5173/@vite/client">
-      </script>
-      """
-    end
+    ~H"""
+    <script :if={Application.get_env(:acme, :use_vite_server)} type="module">
+      import RefreshRuntime from "http://localhost:5173/@react-refresh"
+      RefreshRuntime.injectIntoGlobalHook(window)
+      window.$RefreshReg$ = () => {}
+      window.$RefreshSig$ = () => (type) => type
+      window.__vite_plugin_react_preamble_installed__ = true
+    </script>
+    <script
+      :if={Application.get_env(:acme, :use_vite_server)}
+      type="module"
+      src="http://localhost:5173/@vite/client"
+    >
+    </script>
+    """
   end
 
   def metas do
