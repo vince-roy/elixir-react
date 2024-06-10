@@ -23,3 +23,16 @@ This project contains examples on running Expo, Elixir and React together end-to
 
  ### Production on Fly.io
  
+ ### Tigris storage
+ This is where the client code is stored. Storing with the application itself would result in code split chunks potentially being missing for users after redeploy.
+
+1. Create the storage
+ ```sh
+ fly storage create
+ # https://fly.io/docs/reference/tigris/
+ ```
+
+2. Copy the relevant variables in `.env` (see `.env.example` for the variable names)
+
+
+ 

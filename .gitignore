@@ -38,3 +38,5 @@ npm-debug.log
 
 
 *.secret.exs
+
+.env
