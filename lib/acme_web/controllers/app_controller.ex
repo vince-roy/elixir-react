@@ -52,10 +52,10 @@ defmodule AcmeWeb.AppController do
 
       {:error, msg} ->
         # credo:disable-for-next-line
-        IO.inspect(msg)
+        IO.inspect(msg, label: "Node SSR error")
 
         conn
-        |> send_resp(500, "Error")
+        |> send_resp(500, "Error. Is the Node server running?")
     end
   end
 end
