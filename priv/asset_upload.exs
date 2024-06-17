@@ -1,14 +1,20 @@
 alias ExAws.S3
 
 Mix.install([
+  {:dotenvy, "~> 0.8.0"},
   {:ex_aws_s3, "~> 2.3"},
   {:hackney, "~> 1.18"},
   {:jason, "~> 1.2"}
 ])
 
-# config :ex_aws,
-#   access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
-#   secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role]
+{:ok,
+ %{
+   "AWS_ACCESS_KEY_ID" => access_key_id,
+   "AWS_ENDPOINT_URL_S3" => host,
+   "AWS_REGION" => region,
+   "AWS_SECRET_ACCESS_KEY" => secret_access_key,
+   "S3_BUCKET_NAME" => bucket_name
+ }} = Dotenvy.source([".env", System.get_env()])
 
 paths =
   Path.wildcard("./priv/static/public/**/*")
@@ -22,7 +28,7 @@ paths =
 
 upload_file = fn {src_path, dest_path} ->
   S3.put_object(
-    System.fetch_env!("S3_BUCKET_NAME"),
+    bucket_name,
     dest_path,
     File.read!(src_path),
     acl: "public-read",
@@ -48,8 +54,10 @@ upload_file = fn {src_path, dest_path} ->
       end
   )
   |> ExAws.request!(
-    host: System.fetch_env!("AWS_ENDPOINT_URL_S3"),
-    region: System.fetch_env!("AWS_REGION")
+    access_key_id: access_key_id,
+    host: host,
+    region: region,
+    secret_access_key: secret_access_key
   )
 end
 

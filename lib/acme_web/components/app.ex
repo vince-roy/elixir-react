@@ -36,7 +36,7 @@ defmodule AcmeWeb.App do
           |> Jason.decode!()
           |> case do
             %{"src/entry-client.tsx" => %{"file" => file}} ->
-              [Path.join([AcmeWeb.cdn_url(), "/public/client/", file])]
+              [Path.join([AcmeWeb.cdn_url(), "/client/", file])]
 
             _ ->
               []

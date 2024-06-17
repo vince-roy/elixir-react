@@ -1,5 +1,7 @@
 import Config
+import Dotenvy
 
+source([".env", System.get_env()])
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration
@@ -19,6 +21,11 @@ import Config
 if System.get_env("PHX_SERVER") do
   config :acme, AcmeWeb.Endpoint, server: true
 end
+
+config :acme, AcmeWeb.Endpoint,
+  cdn_url:
+    System.get_env("CDN_URL") ||
+      "https://#{env!("AWS_ENDPOINT_URL_S3", :string!)}/#{env!("S3_BUCKET_NAME", :string!)}"
 
 if config_env() == :prod do
   database_url =

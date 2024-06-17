@@ -1,3 +1,12 @@
+{:ok,
+ %{
+   "AWS_ENDPOINT_URL_S3" => host,
+   "AWS_REGION" => region,
+   "S3_BUCKET_NAME" => bucket_name
+ }} = Dotenvy.source([".env", System.get_env()])
+
+cdn_url = System.get_env("CDN_URL") || "https://#{host}/#{bucket_name}"
+
 create_manifest = fn
   paths ->
     root =

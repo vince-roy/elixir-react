@@ -1,7 +1,7 @@
 import Config
 
 config :acme,
-  use_vite_server: true
+  use_vite_server: false
 
 # Configure your database
 config :acme, Acme.Repo,
@@ -20,7 +20,6 @@ config :acme, Acme.Repo,
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
 config :acme, AcmeWeb.Endpoint,
-  cdn_url: "/",
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],

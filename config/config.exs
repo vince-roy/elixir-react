@@ -13,7 +13,6 @@ config :acme,
 
 # Configures the endpoint
 config :acme, AcmeWeb.Endpoint,
-  cdn_url: "http://localhost:4000/public",
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [

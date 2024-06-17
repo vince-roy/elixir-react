@@ -9,7 +9,7 @@ defmodule AcmeWeb.Expo do
         |> Jason.decode!()
         |> case do
           %{"root" => path} ->
-            ["http://localhost:4000/public" <> path]
+            [Path.join([AcmeWeb.cdn_url(), path])]
 
           _ ->
             []
