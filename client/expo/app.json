@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "inlo",
-    "slug": "inlo",
+    "name": "acme",
+    "slug": "acme",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
