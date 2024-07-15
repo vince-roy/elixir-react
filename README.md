@@ -21,6 +21,8 @@ This project contains examples on running Expo, Elixir and React together end-to
  * React/Vite WIP
 
  ### Production on Fly.io
+ 1. Rnu
+ Run `fly tokens create deploy -x 999999h` to create a token and set it as the FLY_API_TOKEN secret in your GitHub repository settings
  
  ### Tigris storage
  This is where the client code is stored. Storing with the application itself would result in code split chunks potentially being missing for users after redeploy.
@@ -32,15 +34,3 @@ This project contains examples on running Expo, Elixir and React together end-to
  ```
 
 2. Copy the relevant variables in `.env` (see `.env.example` for the variable names)
-
-
-
-Before deployment or merging to main
-1. Linting Expo
-2. Linting Marketing
-3. Check types Expo
-4. Check types Marketing
-5. Elixir tests
-6. build assets
-7. upload assets
-8. Deploy
