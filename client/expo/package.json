@@ -3,10 +3,10 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "android": "expo start --android",
+    "android": "expo run:android",
     "build:web": "expo export -p web",
     "check-types": "tsc --noEmit --skipLibCheck",
-    "ios": "expo start --ios",
+    "ios": "expo run:ios",
     "lint": "expo lint",
     "reset-project": "node ./scripts/reset-project.js",
     "start": "expo start",
